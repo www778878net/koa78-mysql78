@@ -11,13 +11,12 @@ class Mysql78 {
      *
      */
     constructor(config) {
-        console.log(config);
-        this._host = config["host"] || "127.0.0.1";
-        let port = config.port || 3306;
-        let max = config.max || 200;
-        let user = config.user || "root";
-        this.isLog = config.isLog || false;
-        this.isCount = config.isCount || false;
+        this._host = config["host"] || "127.0.0.1"; //IP
+        let port = config.port || 3306; //�˿�
+        let max = config.max || 200; //����̳߳�
+        let user = config.user || "root"; //mysqluname
+        this.isLog = config.isLog || false; //�Ƿ��ӡ�����ܿ���
+        this.isCount = config.isCount || false; //�Ƿ�ͳ��Ч���ܿ���
         this._pool = mysql.createPool({
             'connectionLimit': max,
             'host': this._host,
@@ -30,7 +29,7 @@ class Mysql78 {
         });
     }
     /**
-     * ����ϵͳ���ñ�
+     * һ������ϵͳ���ñ�
      * Create system common table
      *
      * */
