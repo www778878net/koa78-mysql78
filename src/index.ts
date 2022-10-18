@@ -15,14 +15,13 @@ export default class Mysql78 {
      *let  config={host:"127.0.0.1",password:"test",database:"testdb"}
      * 
      */ 
-    constructor(config: any) {
-        console.log(config)
-        this._host = config["host"] || "127.0.0.1"; 
-        let port:number = config.port || 3306;
-        let max: number = config.max || 200;
-        let user: string = config.user || "root";
-        this.isLog = config.isLog || false;
-        this.isCount = config.isCount || false;
+    constructor(config: any) { 
+        this._host = config["host"] || "127.0.0.1"; //IP
+        let port:number = config.port || 3306;//端口
+        let max: number = config.max || 200;//最大线程池
+        let user: string = config.user || "root";//mysqluname
+        this.isLog = config.isLog || false;//是否打印调试总开关
+        this.isCount = config.isCount || false;//是否统计效率总开关
 
         this._pool = mysql.createPool({
             'connectionLimit': max,
@@ -36,7 +35,7 @@ export default class Mysql78 {
         });
     }
     /**
-     * 创建系统常用表
+     * 一键创建系统常用表
      * Create system common table
      * 
      * */
