@@ -7,15 +7,16 @@ import dayjs = require("dayjs");
 import UpInfo from "@www778878net/koa78-upinfo";
 export default class Mysql78 {
     _pool: any;//pool
-    _host: string;// 
-    isLog: boolean;//Whether to trace invocation records (default writing to the sys_warn table affects performance)
-    isCount: boolean;//Whether or not to call count (default writing to SYS SQL table affects performance)
+    _host: string="";// 
+    isLog: boolean=false;//Whether to trace invocation records (default writing to the sys_warn table affects performance)
+    isCount: boolean=false;//Whether or not to call count (default writing to SYS SQL table affects performance)
     /*
      * small
      *let  config={host:"127.0.0.1",password:"test",database:"testdb"}
      * 
      */ 
     constructor(config: any) { 
+        if (config == null) return;
         this._host = config["host"] || "127.0.0.1"; //IP
         let port:number = config.port || 3306;//端口
         let max: number = config.max || 200;//最大线程池

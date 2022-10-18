@@ -1,6 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const Mysql = require('../dist/index').default;
+const Mysql78 = require('../dist/index').default;
 const UpInfo = require('@www778878net/koa78-upinfo').default
 var iconv = require('iconv-lite');
 var fs = require('fs'); 
@@ -19,7 +19,16 @@ function loadjson(filepath) {
     }
     return data;
 }
-let mysql78 = new Mysql(config["mysql"]);
+let mysql78 = new Mysql78(config["mysql"]);
+describe('test null ', () => {
+    it(' return anything', () => {
+        let testmysql = new Mysql78(null)
+        //no catch err
+        const result = 1;
+        expect(result).to.equal(1);
+        //done(); // Í¨ÖªMocha²âÊÔ½áÊø
+    });
+});
 describe('test creatTb ', () => {
     it(' return anything', () => {
         const result = 1;

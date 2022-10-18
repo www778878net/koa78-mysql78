@@ -11,6 +11,11 @@ class Mysql78 {
      *
      */
     constructor(config) {
+        this._host = ""; // 
+        this.isLog = false; //Whether to trace invocation records (default writing to the sys_warn table affects performance)
+        this.isCount = false; //Whether or not to call count (default writing to SYS SQL table affects performance)
+        if (config == null)
+            return;
         this._host = config["host"] || "127.0.0.1"; //IP
         let port = config.port || 3306; //�˿�
         let max = config.max || 200; //����̳߳�
