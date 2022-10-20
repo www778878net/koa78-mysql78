@@ -16,7 +16,7 @@ export default class Mysql78 {
      * 
      */ 
     constructor(config: any) { 
-        if (config == null) return;
+        if (!config) return;
         this._host = config["host"] || "127.0.0.1"; //IP
         let port:number = config.port || 3306;//端口
         let max: number = config.max || 200;//最大线程池
