@@ -65,8 +65,8 @@ describe('test get and release con ', () => {
 describe('test doT ', () => {
     it(' return ok', () => {
         let up = new UpInfo().getGuest();//Simulated user upload
-        let cmds = ["update test set data=? where idpk=?"
-            , "update test set item=? where idpk=?"
+        let cmds = ["update testtb set data=? where idpk=?"
+            , "update testtb set item=? where idpk=?"
         ]
         let values = [[up.getNewid(), "1"]
             , [up.getNewid(), "2"]]
@@ -89,7 +89,7 @@ describe('test select ', () => {
     it('should return 1 row', () => {
         let up = new UpInfo().getGuest();//Simulated user upload
    
-        let sb = "select * from test where id=?" 
+        let sb = "select * from testtb where id=?" 
        return mysql78.doGet(sb, ["id"],up)
             .then(function (tb) {
                 console.log(tb)
@@ -106,7 +106,7 @@ describe('test mAdd ', () => {
      
         let up = new UpInfo().getGuest();//Simulated guest upload
        
-        let sb = "insert into test(cid,kind,item,data,upby,uptime,id)SELECT ?,?,?,?,?,?,?"
+        let sb = "insert into testtb(cid,kind,item,data,upby,uptime,id)SELECT ?,?,?,?,?,?,?"
         return mysql78.doMAdd(sb, ["cidval", "kindval", "itemval"
             , "dataval",   up.uname, up.utime, up.mid],up)
             .then(function (result) {
@@ -124,7 +124,7 @@ describe('test modify ', () => {
 
         let up = new UpInfo().getGuest();//Simulated guest upload
 
-        let sb = "update test set data=? where idpk=?"
+        let sb = "update testtb set data=? where idpk=?"
         return mysql78.doM(sb, [up.mid,1], up)
             .then(function (result) {
                 console.log(result)

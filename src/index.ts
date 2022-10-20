@@ -6,7 +6,7 @@ import { promises } from "fs";
 import dayjs = require("dayjs");
 import UpInfo from "@www778878net/koa78-upinfo";
 export default class Mysql78 {
-    _pool: any;//pool
+    _pool: any=null;//pool
     _host: string="";// 
     isLog: boolean=false;//Whether to trace invocation records (default writing to the sys_warn table affects performance)
     isCount: boolean=false;//Whether or not to call count (default writing to SYS SQL table affects performance)
@@ -67,6 +67,10 @@ export default class Mysql78 {
 
         return new Promise(function (resolve, reject) {
             let dstart = new Date();
+            if (self._pool == null) {
+                resolve([])
+                return;
+            }
             self._pool.getConnection(function (err, client) {
                 if (err) {
                     console.error(new Date() + 'mysql pool getcon Error: ' + Util.inspect(err));
@@ -120,7 +124,11 @@ export default class Mysql78 {
         let debug = (up&&up.debug) || false; 
         let self = this;
         return new Promise((resolve, reject) => {
-            this._pool.getConnection((err, con) => {
+            if (self._pool == null) {
+                resolve("pool null")
+                return;
+            }
+            self._pool.getConnection((err, con) => {
                 if (err) {
                     //console.error(new Date() + 'mysql pool getcon Error: ' + Util.inspect(err));
                     reject(err);
@@ -177,6 +185,10 @@ export default class Mysql78 {
 
         return new Promise(function (resolve, reject) {
             let dstart = new Date();
+            if (self._pool == null) {
+                resolve("pool null")
+                return;
+            }
             self._pool.getConnection(function (err, client) {
                 if (err) {
                     reject(err);
@@ -221,6 +233,10 @@ export default class Mysql78 {
 
         return new Promise(function (resolve, reject) {
             let dstart = new Date();
+            if (self._pool == null) {
+                resolve("pool null")
+                return;
+            }
             self._pool.getConnection(function (err, client) {
                 if (err) {
                     reject(err);
@@ -301,6 +317,10 @@ export default class Mysql78 {
     getConnection(): Promise<any> {
         let self = this;
         return new Promise(function (resolve, reject) { 
+            if (self._pool == null) {
+                resolve("pool null")
+                return;
+            }
             self._pool.getConnection(function (err, client) {
                 if (err) {
                     reject(err);
@@ -324,6 +344,10 @@ export default class Mysql78 {
         let self = this;
 
         return new Promise(function (resolve, reject) {
+            if (self._pool == null) {
+                resolve("pool null")
+                return;
+            }
             if (!self.isLog) {
                 resolve("isLog is false");
                 return;
@@ -375,6 +399,10 @@ export default class Mysql78 {
         return new Promise(function (resolve, reject) { 
             if (!self.isCount) {
                 resolve("isCount is false");
+                return;
+            }
+            if (self._pool == null) {
+                resolve("pool null")
                 return;
             }
             self._pool.getConnection(function (err, client) {
