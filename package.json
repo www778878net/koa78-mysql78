@@ -1,6 +1,6 @@
 {
   "name": "@www778878net/mysql78",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@www778878net/koa78-upinfo": "^0.0.105",
     "dayjs": "^1.11.5",
-    "md5": "^2.3.0",    
+    "md5": "^2.3.0",
     "mysql2": "^3.11.0",
     "node-upinfo": "^2.0.1"
   },
