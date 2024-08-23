@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Util = require('util');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const md5 = require("md5");
 const dayjs = require("dayjs");
 class Mysql78 {

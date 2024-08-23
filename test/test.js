@@ -52,7 +52,7 @@ describe('test addwarn ', () => {
 describe('test get and release con ', () => {
     it(' return ok',async () => {
         let con = await mysql78.getConnection()
-        expect(con.config.database).to.equal("testdb");
+        expect(con.config.database).to.equal("saas");
         let result = await mysql78.releaseConnection(con)
         expect(result).to.equal("ok");
             

@@ -1,6 +1,6 @@
 
 const Util = require('util');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 import md5 = require("md5");
 import { promises } from "fs";
 import dayjs = require("dayjs");
