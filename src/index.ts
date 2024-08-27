@@ -1,17 +1,17 @@
-
-import { promises as fs } from 'fs';
-import * as dayjs from 'dayjs';
-import md5 from 'md5';
+import { promises as fs } from 'node:fs';
+import dayjs from 'dayjs';
+import { createHash } from 'node:crypto';
 import * as mysql from 'mysql2/promise';
 import UpInfo from '@www778878net/koa78-upinfo';
 import TsLog78, { ConsoleLog78 } from '@www778878net/tslog78';
+import md5 from 'md5';
 
 export default class Mysql78 {
   private _pool: mysql.Pool | null = null;
   private _host: string = '';
   public isLog: boolean = false;
   public isCount: boolean = false;
-  private log: TsLog78;
+  private log: TsLog78 = new TsLog78();
 
   constructor(config: {
     host?: string;
@@ -25,8 +25,8 @@ export default class Mysql78 {
   }) {
     if (!config) return;
 
-    this.log = new TsLog78();
-    this.log.setup(null, null, new ConsoleLog78(), 'mysql');
+  
+    this.log.setup(undefined, undefined, new ConsoleLog78(), 'mysql');
     this._host = config.host ?? '127.0.0.1';
     const port = config.port ?? 3306; // 端口
     const max = config.max ?? 200; // 最大线程数

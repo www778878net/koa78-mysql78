@@ -28,7 +28,7 @@
     "dev": "git checkout develop && git merge main && git push origin develop",
     "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit",
     "build": "tsc",
-    "test": "npm run build && npx jest",
+    "test": "npm run build && jest --config jest.config.js",
     "prepublishOnly": "npm run build",
     "preversion": "npm test",
     "version": "git add -A",
@@ -64,9 +64,14 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@www778878net/koa78-upinfo": "^2",
+    "@www778878net/koa78-upinfo": "^2.0.3",
     "@www778878net/tslog78": "^0.1.6",
-    "md5": "^2.3.0"
+    "dayjs": "^1.11.13",
+    "md5": "^2.3.0",
+    "mysql2": "^3.11.0"
   },
-  "bundleDependencies": []
+  "bundleDependencies": [],
+  "jest": {
+    "config": "./jest.config.js"
+  }
 }
