@@ -5,7 +5,7 @@ declare global {
   var __TEST_CONFIG__: any;
 }
 
-const config = global.__TEST_CONFIG__;
+const config = global.__TEST_CONFIG__ as { mysql: any };
 const mysql78 = new Mysql78(config.mysql);
 
 describe('Mysql78', () => {

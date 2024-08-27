@@ -43,7 +43,7 @@
   "scripts": {
     "dev": "git checkout develop && git merge main && git push origin develop",
     "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit",
-    "build": "tsc",
+    "build": "npx tsc",
     "test": "npm run build && jest --config jest.config.js",
     "prepublishOnly": "npm run build",
     "preversion": "npm test",
@@ -60,9 +60,9 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/md5": "^2.3.5",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "@typescript-eslint/parser": "^8.2.0",
+    "@types/node": "^18.19.46",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -80,11 +80,11 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "koa78-upinfo": "^3",
-    "tslog78": "^1",
     "dayjs": "^1.11.13",
+    "koa78-upinfo": "^3.1.2",
     "md5": "^2.3.0",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.11.0",
+    "tslog78": "^1.1.1"
   },
   "bundleDependencies": [],
   "jest": {
