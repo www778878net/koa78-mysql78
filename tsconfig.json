@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "module": "commonjs",
-    "target": "es6",
-    "outDir": "./dist",
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "strict": true
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "src",
+    "outDir": "dist"
   },
- 
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "ts-jest": {
+    "tsConfig": "tsconfig.json",
+    "useESM": true
+  }
 }

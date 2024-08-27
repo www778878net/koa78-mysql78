@@ -1,0 +1,29 @@
+# 顶层配置文件，不再向上查找
+root = true
+
+# 对所有文件生效
+[*]
+# 设置字符集为UTF-8
+charset = utf-8
+# 缩进风格使用空格
+indent_style = space
+# 缩进大小为2个空格
+indent_size = 2
+# 换行符使用 lf
+end_of_line = lf
+# 文件结尾插入新行
+insert_final_newline = true
+# 删除行尾空格
+trim_trailing_whitespace = true
+
+# 对于 Markdown 文件的特殊设置
+[*.md]
+trim_trailing_whitespace = false
+
+# 对于 TypeScript 和 JavaScript 文件的特殊设置
+[*.{ts,js}]
+quote_type = single
+
+# 对于 JSON 文件的特殊设置
+[*.json]
+indent_size = 2

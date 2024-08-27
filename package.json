@@ -3,13 +3,14 @@
   "version": "1.0.2",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "dist/index.d.ts",
   "author": {
-    "name": "Frieda.Hu<657225485@qq.com>"
+    "name": "Frieda.Hu<657225485@qq.com>",
+    "email": "657225485@qq.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/www778878net/koa78-Upinfo.git"
+    "url": "git+https://github.com/www778878net/koa78-mysql78.git"
   },
   "license": "Apache-2.0",
   "files": [
@@ -24,33 +25,48 @@
     "nodejs"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon -e ts --exec ts-node src/index.ts",
-    "postpublish": "git push origin --all && git push origin --tags",
-    "postversion": "npm publish --access public",
-    "preversion": "npm test ",
-    "test": "tsc   && mocha --config  config.json  --reporter spec  -t 5000  --exit",
-    "build": "tsc  "
+    "dev": "git checkout develop && git merge main && git push origin develop",
+    "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit",
+    "build": "tsc",
+    "test": "npm run build && npx jest",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm test",
+    "version": "git add -A",
+    "postversion": "git push --follow-tags && git checkout develop && git merge main && git push origin develop",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "bundledDependencies": false,
   "devDependencies": {
-    "@types/node": "^14.18.31",
-    "chai": "^4.3.4",
+    "@types/jest": "^29.5.12",
+    "@types/md5": "^2.3.5",
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
     "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.35.0",
     "fs": "0.0.1-security",
     "iconv-lite": "^0.6.3",
-    "mocha": "^9.0.2",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.8.4"
+    "jest": "^29.7.0",
+    "mochawesome": "^4.1.0",
+    "nodemon": "^3.1.4",
+    "phantom": "^6.3.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@www778878net/koa78-upinfo": "^1.0.1",
-    "dayjs": "^1.11.5",
-    "md5": "^2.3.0",
-    "mysql2": "^3.11.0",
-    "node-upinfo": "^2.0.1"
+    "@www778878net/koa78-upinfo": "^2",
+    "@www778878net/tslog78": "^0.1.6",
+    "md5": "^2.3.0"
   },
   "bundleDependencies": []
 }
