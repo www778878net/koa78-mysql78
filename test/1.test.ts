@@ -79,4 +79,8 @@ describe('Mysql78', () => {
     const result = await mysql78['_saveLog']('SELECT * FROM testtb', [], 100, 1000, upInfo);
     expect(result).toBe('ok');
   });
+
+  afterAll(async () => {
+    await mysql78.close(); // 假设您在 Mysql78 类中添加了一个 close 方法
+  });
 });

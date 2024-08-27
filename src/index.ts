@@ -319,4 +319,10 @@ export default class Mysql78 {
       return 'error';
     }
   }
+
+  async close() {
+    if (this._pool) {
+      await this._pool.end();
+    }
+  }
 }
