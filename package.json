@@ -1,6 +1,6 @@
 {
   "name": "@www778878net/mysql78",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,7 +35,8 @@
     "error-handling",
     "debugging",
     "saas",
-    "koa","koa78",
+    "koa",
+    "koa78",
     "express",
     "node-mysql"
   ],
