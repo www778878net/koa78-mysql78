@@ -8,10 +8,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@www778878net/*": ["node_modules/@www778878net/*"]
-    },
+    "forceConsistentCasingInFileNames": true,    
     "baseUrl": "."
   },
   "include": ["src/**/*", "test/**/*"],
