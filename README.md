@@ -1,14 +1,15 @@
-# koa78-mysql78
+<h1 align="center">koa78-mysql78</h1>
 
 <div align="center">
+
 English| [简体中文](./README.cn.md) 
 
 
-## "koa78-mysql78" encapsulates debugging and efficiency statistics functions for the framework
+## MySQL wrapper for Node.js with debugging and performance features
 
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Build Status](https://dev.azure.com/www778878net/basic_ts/_apis/build/status/www778878net.koa78-mysql78?branchName=main)](https://dev.azure.com/www778878net/basic_ts/_build/latest?definitionId=24&branchName=main)
-[![QQ Group](https://img.shields.io/badge/QQ Group-323397913-blue.svg?style=flat-square&color=12b7f5&logo=qq)](https://qm.qq.com/cgi-bin/qm/qr?k=it9gUUVdBEDWiTOH21NsoRHAbE9IAzAO&jump_from=webapi&authKey=KQwSXEPwpAlzAFvanFURm0Foec9G9Dak0DmThWCexhqUFbWzlGjAFC7t0jrjdKdL)
+[![QQ群](https://img.shields.io/badge/QQ群-323397913-blue.svg?style=flat-square&color=12b7f5&logo=qq)](https://qm.qq.com/cgi-bin/qm/qr?k=it9gUUVdBEDWiTOH21NsoRHAbE9IAzAO&jump_from=webapi&authKey=KQwSXEPwpAlzAFvanFURm0Foec9G9Dak0DmThWCexhqUFbWzlGjAFC7t0jrjdKdL)
 
 </div>
 
