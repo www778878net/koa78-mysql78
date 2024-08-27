@@ -18,11 +18,26 @@
     "dist"
   ],
   "keywords": [
+    "nodejs",
+    "mysql",
+    "database",
+    "orm",
     "typescript",
-    "koa",
-    "7788",
-    "www778878net",
-    "nodejs"
+    "connection-pool",
+    "transactions",
+    "logging",
+    "performance-monitoring",
+    "multi-tenancy",
+    "query-builder",
+    "database-wrapper",
+    "sql",
+    "pooling",
+    "error-handling",
+    "debugging",
+    "saas",
+    "koa","koa78",
+    "express",
+    "node-mysql"
   ],
   "scripts": {
     "dev": "git checkout develop && git merge main && git push origin develop",

@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
 
       - name: Install dependencies
         run: pnpm install
