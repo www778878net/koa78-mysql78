@@ -1,5 +1,5 @@
 import Mysql78 from '../src/index';
-import UpInfo from '@www778878net/koa78-upinfo';
+import UpInfo from 'koa78-upinfo';
 
 declare global {
   var __TEST_CONFIG__: any;

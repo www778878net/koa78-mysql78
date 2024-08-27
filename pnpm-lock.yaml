@@ -8,21 +8,21 @@ importers:
 
   .:
     dependencies:
-      '@www778878net/koa78-upinfo':
-        specifier: ^2.0.3
-        version: 2.0.3
-      '@www778878net/tslog78':
-        specifier: ^0.1.6
-        version: 0.1.7
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      koa78-upinfo:
+        specifier: ^3
+        version: 3.0.0
       md5:
         specifier: ^2.3.0
         version: 2.3.0
       mysql2:
         specifier: ^3.11.0
         version: 3.11.0
+      tslog78:
+        specifier: ^1
+        version: 1.0.0
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
@@ -518,16 +518,6 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
-
-  '@www778878net/koa78-upinfo@2.0.3':
-    resolution: {integrity: sha512-DW2rek/12KU32RBE3p4BKNHD/H1L+vQc319kuhHWG/agcgim3Jiqx1wRUdByOD69QlqO+BVzUxi/WsHLzPBYbg==}
-    engines: {node: '>=14.0.0'}
-    bundledDependencies: []
-
-  '@www778878net/tslog78@0.1.7':
-    resolution: {integrity: sha512-U2NYXBvnSju/dx6IZTu46PsNDMCJ0rtPR/86uKKcHpXGKnIk5hWY/o6bWa5BPrRU3MmjY9nwakoFYelYDK5oMQ==}
-    engines: {node: '>=18.0.0'}
-    bundledDependencies: []
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1813,6 +1803,10 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
+  koa78-upinfo@3.0.0:
+    resolution: {integrity: sha512-DN8l6CF9KuOs9PSDFnMJEEgzhK38ullp1bdyuT+xRFuDZwSFZv6N0FTiMDvfrQRW68OjrgMio1rOxz5H8WZeIw==}
+    engines: {node: '>=14.0.0'}
+
   kuler@2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
 
@@ -2555,6 +2549,10 @@ packages:
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
+
+  tslog78@1.0.0:
+    resolution: {integrity: sha512-k/6q8LeUhNagLRhqTyTd1jadMJwHK2YbHc2NTTYZLWrlG3FaQge5YkpY3VNRRDq1GqHQUD9wASMFu0AtILfkzg==}
+    engines: {node: '>=18.0.0'}
 
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
@@ -3349,12 +3347,6 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
-
-  '@www778878net/koa78-upinfo@2.0.3':
-    dependencies:
-      dayjs: 1.11.13
-
-  '@www778878net/tslog78@0.1.7': {}
 
   acorn-jsx@5.3.2(acorn@8.12.1):
     dependencies:
@@ -4972,6 +4964,10 @@ snapshots:
 
   kleur@3.0.3: {}
 
+  koa78-upinfo@3.0.0:
+    dependencies:
+      dayjs: 1.11.13
+
   kuler@2.0.0: {}
 
   leven@3.1.0: {}
@@ -5800,6 +5796,8 @@ snapshots:
       json5: 1.0.2
       minimist: 1.2.8
       strip-bom: 3.0.0
+
+  tslog78@1.0.0: {}
 
   tunnel-agent@0.6.0:
     dependencies:

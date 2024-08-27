@@ -2,8 +2,8 @@ import { promises as fs } from 'node:fs';
 import dayjs from 'dayjs';
 import { createHash } from 'node:crypto';
 import * as mysql from 'mysql2/promise';
-import UpInfo from '@www778878net/koa78-upinfo';
-import TsLog78, { ConsoleLog78 } from '@www778878net/tslog78';
+import UpInfo from 'koa78-upinfo';
+import TsLog78, { ConsoleLog78 } from 'tslog78';
 import md5 from 'md5';
 
 export default class Mysql78 {
