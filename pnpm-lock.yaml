@@ -12,8 +12,8 @@ importers:
         specifier: ^1.11.13
         version: 1.11.13
       koa78-upinfo:
-        specifier: ^3.1.2
-        version: 3.1.2
+        specifier: ^4.0.0
+        version: 4.0.0
       md5:
         specifier: ^2.3.0
         version: 2.3.0
@@ -1803,10 +1803,9 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
-  koa78-upinfo@3.1.2:
-    resolution: {integrity: sha512-djeDb7gecWSFU0vLlA5Vbm0lBVxdjDAz7SDem9aL2N7s5LHZGei6zXDLHF1XE9mL2vkm8E9HFHTOirIm85mHMA==}
+  koa78-upinfo@4.0.0:
+    resolution: {integrity: sha512-TezI/Z24V0LY8v3a1vPt6cOf/9hoJVVpfcykE6Jo32pj34VEJF37MPFSws3WZN95u7Q5ffK10bJwqpVgISlfsw==}
     engines: {node: '>=14.0.0'}
-    bundledDependencies: []
 
   kuler@2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
@@ -2554,6 +2553,7 @@ packages:
   tslog78@1.1.1:
     resolution: {integrity: sha512-47759x9+ln93gVkTnnF23+8hMLd3CMc/Voi07aoZIQ701m4QECl03cNOH12bu+O9rLOzMuhbMhbJ6Sq1XQPGeA==}
     engines: {node: '>=18.0.0'}
+    bundledDependencies: []
 
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
@@ -4965,7 +4965,7 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  koa78-upinfo@3.1.2:
+  koa78-upinfo@4.0.0:
     dependencies:
       dayjs: 1.11.13
 
