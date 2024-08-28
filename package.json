@@ -1,6 +1,6 @@
 {
   "name": "mysql78",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "nodejs koa78封装 上传类",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
