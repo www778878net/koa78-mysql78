@@ -176,7 +176,7 @@ export default class Mysql78 {
     } catch (err) {
       this._addWarn(JSON.stringify(err) + " c:" + cmdtext + " v" + values.join(","), "err" + up.apisys, up);
       this.log.logErr(err as Error, 'mysql_doM');
-      return 0;
+      return -1;
     }
   }
 
