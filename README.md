@@ -47,7 +47,7 @@ English | [简体中文](./README.cn.md)
 ## Installation
 
 ~~~
-npm i @www778878net/koa78-mysql78
+npm i koa78-mysql78
 ~~~
 
 ## Properties
@@ -73,8 +73,8 @@ npm i @www778878net/koa78-mysql78
 ## Usage Example
 
 ~~~
-import Mysql78 from "@www778878net/koa78-mysql78";
-import UpInfo from "@www778878net/koa78-upinfo";
+import Mysql78 from "koa78-mysql78";
+import UpInfo from "koa78-upinfo";
 
 const config = {
   host: "localhost",
