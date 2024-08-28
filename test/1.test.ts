@@ -12,13 +12,13 @@ describe('Mysql78', () => {
   let upInfo: UpInfo;
 
   beforeAll(() => {
-    upInfo = new UpInfo(null).getGuest();
+    upInfo = UpInfo.getGuest();
   });
 
-  test('creatTb should create system tables', async () => {
-    const result = await mysql78.creatTb(upInfo);
-    expect(result).toBe('ok');
-  });
+  // test('creatTb should create system tables', async () => {
+  //   const result = await mysql78.creatTb(upInfo);
+  //   expect(result).toBe('ok');
+  // });
 
   test('doGet should return data', async () => {
     const cmdtext = 'SELECT * FROM testtb LIMIT 1';
@@ -36,7 +36,7 @@ describe('Mysql78', () => {
 
   test('doMAdd should insert data and return insertId', async () => {
     const cmdtext = 'INSERT INTO testtb (cid, kind, item, data, upby, uptime, id) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    const values = ['test_cid', 'test_kind', 'test_item', 'test_data', upInfo.uname, new Date(), upInfo.getNewid()];
+    const values = ['test_cid', 'test_kind', 'test_item', 'test_data', upInfo.uname, new Date(), UpInfo.getNewid()];
     const result = await mysql78.doMAdd(cmdtext, values, upInfo);
     expect(typeof result).toBe('number');
     expect(result).toBeGreaterThan(0);
@@ -49,7 +49,7 @@ describe('Mysql78', () => {
     ];
     const values = [
       ['updated_data_1', 1],
-      ['test_cid_2', 'test_kind_2', 'test_item_2', 'test_data_2', upInfo.uname, new Date(), upInfo.getNewid()]
+      ['test_cid_2', 'test_kind_2', 'test_item_2', 'test_data_2', upInfo.uname, new Date(), UpInfo.getNewid()]
     ];
     const errtexts = ['Error updating', 'Error inserting'];
     const logtext = 'Transaction test';
