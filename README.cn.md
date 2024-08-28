@@ -46,96 +46,42 @@
 
 ## 安装 rely on
 
-详见API文档地址
+```
+npm i @www778878net/koa78-mysql78
+```
 
 ## 属性 props
 
-详见API文档地址
+- isLog: boolean - 是否启用日志记录
+- isCount: boolean - 是否启用性能统计
+- _pool: mysql.Pool | null - MySQL连接池
 
 ## 方法 method
 
-详见API文档地址
-
-## Mysql78 类文档
-
-`Mysql78` 是一个封装了 MySQL 数据库操作的类，提供了一系列便捷的方法来执行 SQL 查询、更新和事务操作。
-
-### 主要特性
-
-- 连接池管理
-- 支持基本的 CRUD 操作
-- 事务支持
-- 调试和日志功能
-- 性能统计
-
-### 构造函数
-
-构造函数接受一个配置对象，包含以下属性：
-
-- `host`: 数据库主机地址（默认为 '127.0.0.1'）
-- `port`: 数据库端口（默认为 3306）
-- `max`: 连接池最大连接数（默认为 200）
-- `user`: 数据库用户名（默认为 'root'）
-- `password`: 数据库密码（必填）
-- `database`: 数据库名称（必填）
-- `isLog`: 是否启用日志（默认为 false）
-- `isCount`: 是否启用性能统计（默认为 false）
-
-### 主要方法
-
-#### creatTb(up: UpInfo): Promise<string>
-
-创建系统常用表。
-
-#### doGet(cmdtext: string, values: any[], up: UpInfo): Promise<any[]>
-
-执行 SELECT 查询并返回结果。
-
-#### doM(cmdtext: string, values: any[], up: UpInfo): Promise<number>
-
-执行 UPDATE 操作并返回受影响的行数。
-
-#### doMAdd(cmdtext: string, values: any[], up: UpInfo): Promise<number>
-
-执行 INSERT 操作并返回插入的 ID。
-
-#### doT(cmds: string[], values: any[][], errtexts: string[], logtext: string, logvalue: any[], up: UpInfo): Promise<string>
-
-执行事务操作。
-
-#### doTran(cmdtext: string, values: any[], con: mysql.PoolConnection, up: UpInfo): Promise<any>
-
-执行单个事务操作，需要手动管理连接。
-
-#### getConnection(): Promise<mysql.PoolConnection | null>
-
-获取数据库连接。
-
-#### releaseConnection(client: mysql.PoolConnection): Promise<void>
-
-释放数据库连接。
-
-### 私有方法
-
-#### _addWarn(info: string, kind: string, up: UpInfo): Promise<string | number>
-
-添加警告日志。
-
-#### _saveLog(cmdtext: string, values: any[], dlong: number, lendown: number, up: UpInfo): Promise<string>
-
-保存 SQL 执行日志。
+- constructor(config: object): 创建Mysql78实例
+- creatTb(up: UpInfo): Promise<string> - 创建系统常用表
+- doGet(cmdtext: string, values: any[], up: UpInfo): Promise<any[]> - 执行SELECT查询
+- doM(cmdtext: string, values: any[], up: UpInfo): Promise<number> - 执行UPDATE操作
+- doMAdd(cmdtext: string, values: any[], up: UpInfo): Promise<number> - 执行INSERT操作
+- doT(cmds: string[], values: any[][], errtexts: string[], logtext: string, logvalue: any[], up: UpInfo): Promise<string> - 执行事务
+- doTran(cmdtext: string, values: any[], con: mysql.PoolConnection, up: UpInfo): Promise<any> - 执行单个事务操作
+- getConnection(): Promise<mysql.PoolConnection | null> - 获取数据库连接
+- releaseConnection(client: mysql.PoolConnection): Promise<void> - 释放数据库连接
+- setWarnHandler(handler: Function): void - 设置自定义警告处理器
+- close(): Promise<void> - 关闭连接池
 
 ## 使用示例
-```ts
-import Mysql78 from "@www778878net/mysql78";
+
+```
+import Mysql78 from "@www778878net/koa78-mysql78";
 import UpInfo from "@www778878net/koa78-upinfo";
 
 const config = {
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "password",
-  database: "testdb",
+  password: "your_password",
+  database: "your_database",
   isLog: true,
   isCount: true
 };
@@ -161,6 +107,15 @@ const transactionResult = await mysql78.doT(
   [100, 1, 2],
   upInfo
 );
+
+// 设置自定义警告处理器
+mysql78.setWarnHandler(async (info, kind, up) => {
+  console.log(`自定义警告处理: ${kind} - ${info}`);
+  // 在这里可以实现自定义的警告处理逻辑
+});
+
+// 关闭连接池
+await mysql78.close();
 ```
 
 ## 注意事项
@@ -169,6 +124,8 @@ const transactionResult = await mysql78.doT(
 - `isLog` 和 `isCount` 选项会影响性能，建议仅在调试时启用。
 - 事务操作请优先使用 `doT` 方法，而不是手动管理事务。
 - 在生产环境中，请确保正确处理所有可能的错误和异常。
+- 可以通过 `setWarnHandler` 方法设置自定义的警告处理逻辑，以便更灵活地处理和记录警告信息。
+- 使用完毕后，请调用 `close()` 方法关闭连接池，以释放资源。
 
 ## OTHER
 

@@ -12,7 +12,7 @@ export default class Mysql78 {
   public isLog: boolean = false;
   public isCount: boolean = false;
   private log: TsLog78 = new TsLog78();
-
+  private warnHandler: ((info: string, kind: string, up: UpInfo) => Promise<any>) | null = null;
   constructor(config: {
     host?: string;
     port?: number;
@@ -267,14 +267,32 @@ export default class Mysql78 {
   }
 
   /**
-   *Debug function to track online debugging problems with SQL calls (can be set to track users or tables or directories or functions, etc.)
-   *Opening affects performance Suggestions mainly track the developer and the directory under development
-   * The table name sys warn follows the function
-   * @param info log
-   * @param kind select the log
-   * @param up user upload
+   * 设置警告处理器
+   * @param handler 处理警告的函数
+   */
+  setWarnHandler(handler: (info: string, kind: string, up: UpInfo) => Promise<any>): void {
+    this.warnHandler = handler;
+  }
+
+  /**
+   * 调试函数，用于跟踪SQL调用的在线调试问题
+   * 可以设置跟踪用户、表、目录或函数等
+   * 开启会影响性能，建议主要用于跟踪开发者和正在开发的目录
+   * 如果设置了自定义的warnHandler，将优先使用它处理警告
+   * 否则，将警告信息插入sys_warn表
+   * @param info 日志信息
+   * @param kind 日志类型
+   * @param up 用户上传信息
    */
   private async _addWarn(info: string, kind: string, up: UpInfo): Promise<string | number> {
+    if (this.warnHandler) {
+      try {
+        return await this.warnHandler(info, kind, up);
+      } catch (err) {
+        this.log.logErr(err as Error, 'mysql__addWarn_handler');
+      }
+    }
+
     if (!this._pool || !this.isLog) {
       return this.isLog ? 'pool null' : 'isLog is false';
     }
