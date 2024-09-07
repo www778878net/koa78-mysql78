@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { createHash } from 'node:crypto';
 import * as mysql from 'mysql2/promise';
 import UpInfo from 'koa78-upinfo';
-import TsLog78, { ConsoleLog78 } from 'tslog78';
+import  TsLog78 from 'tslog78';
 import md5 from 'md5';
 
 export default class Mysql78 {
@@ -11,7 +11,7 @@ export default class Mysql78 {
   private _host: string = '';
   public isLog: boolean = false;
   public isCount: boolean = false;
-  private log: TsLog78 = new TsLog78();
+  private log: TsLog78=TsLog78.Instance;
   private warnHandler: ((info: string, kind: string, up: UpInfo) => Promise<any>) | null = null;
   constructor(config: {
     host?: string;
@@ -25,8 +25,7 @@ export default class Mysql78 {
   }) {
     if (!config) return;
 
-  
-    this.log.setup(undefined, undefined, new ConsoleLog78(), 'mysql');
+   
     this._host = config.host ?? '127.0.0.1';
     const port = config.port ?? 3306; // 端口
     const max = config.max ?? 200; // 最大线程数
@@ -64,7 +63,7 @@ export default class Mysql78 {
       await this._pool.execute(cmdtext2);
       return 'ok';
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql_creatTb');
+      this.log.error(err as Error);
       return 'error';
     }
   }
@@ -97,7 +96,7 @@ export default class Mysql78 {
       return back;
     } catch (err) {
       this._addWarn(JSON.stringify(err) + " c:" + cmdtext + " v" + values.join(","), "err_" + up.apisys, up);
-      this.log.logErr(err as Error, 'mysql_doGet');
+      this.log.error(err as Error, 'mysql_doGet');
       throw err;
     }
   }
@@ -138,11 +137,11 @@ export default class Mysql78 {
         connection.release();
 
         const errmsg = errtexts.reduce((msg, text, i) => cmds[i] ? msg + text : msg, 'err!');
-        this.log.logErr(err as Error, 'mysql_doT');
+        this.log.error(err as Error, 'mysql_doT');
         return errmsg;
       }
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql_doT_connection');
+      this.log.error(err as Error, 'mysql_doT_connection');
       return 'error';
     }
   }
@@ -175,7 +174,7 @@ export default class Mysql78 {
       return affectedRows;
     } catch (err) {
       this._addWarn(JSON.stringify(err) + " c:" + cmdtext + " v" + values.join(","), "err" + up.apisys, up);
-      this.log.logErr(err as Error, 'mysql_doM');
+      this.log.error(err as Error, 'mysql_doM');
       return -1;
     }
   }
@@ -208,7 +207,7 @@ export default class Mysql78 {
       return insertId;
     } catch (err) {
       this._addWarn(JSON.stringify(err) + " c:" + cmdtext + " v" + values.join(","), "err" + up.apisys, up);
-      this.log.logErr(err as Error, 'mysql_doMAdd');
+      this.log.error(err as Error, 'mysql_doMAdd');
       return 0;
     }
   }
@@ -229,12 +228,13 @@ export default class Mysql78 {
       const [result] = await con.execute(cmdtext, values);
 
       if (debug) {
-        this.log.log(`${cmdtext} v:${values.join(",")} r:${JSON.stringify(result)}`, 0, 'mysql', 'doTran', up.uname);
+
+        this.log.info(`${cmdtext} v:${values.join(",")} r:${JSON.stringify(result)} 0, 'mysql', 'doTran', ${up.uname}`,0);
       }
 
       return result;
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql_doTran');
+      this.log.error(err as Error, 'mysql_doTran');
       throw err;
     }
   }
@@ -261,7 +261,7 @@ export default class Mysql78 {
       const connection = await this._pool.getConnection();
       return connection;
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql_getConnection');
+      this.log.error(err as Error, 'mysql_getConnection');
       return null;
     }
   }
@@ -289,7 +289,7 @@ export default class Mysql78 {
       try {
         return await this.warnHandler(info, kind, up);
       } catch (err) {
-        this.log.logErr(err as Error, 'mysql__addWarn_handler');
+        this.log.error(err as Error, 'mysql__addWarn_handler');
       }
     }
 
@@ -304,7 +304,7 @@ export default class Mysql78 {
       const [results] = await this._pool.execute(cmdtext, values);
       return (results as mysql.ResultSetHeader).affectedRows;
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql__addWarn');
+      this.log.error(err as Error, 'mysql__addWarn');
       return 0;
     }
   }
@@ -333,7 +333,7 @@ export default class Mysql78 {
       ]);
       return 'ok';
     } catch (err) {
-      this.log.logErr(err as Error, 'mysql__saveLog');
+      this.log.error(err as Error  );
       return 'error';
     }
   }

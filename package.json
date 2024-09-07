@@ -41,17 +41,21 @@
     "node-mysql"
   ],
   "scripts": {
-    "dev": "git checkout develop && git merge main && git push origin develop",
-    "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit",
-    "build": "npx tsc",
-    "test": "npm run build && jest --config jest.config.js",
+    "dev": "git checkout develop && git merge main ",
+    "main": "node hooks/mergeBranches.js",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "test": "npm run build && npx jest",
     "prepublishOnly": "npm run build",
     "preversion": "npm test",
     "version": "git add -A",
     "postversion": "git push --follow-tags && git checkout develop && git merge main && git push origin develop",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:major": "npm version major",
+    "precommit": "node hooks/pre-commit.js",
+    "prepush": "node hooks/pre-push.js",
+    "hooks": "node hooks/install-hooks.js"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -61,6 +65,7 @@
     "@types/jest": "^29.5.12",
     "@types/md5": "^2.3.5",
     "@types/node": "^18.19.46",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "cross-env": "^7.0.3",
@@ -75,19 +80,21 @@
     "mochawesome": "^4.1.0",
     "nodemon": "^3.1.4",
     "phantom": "^6.3.0",
+    "reflect-metadata": "^0.2.2",
+    "shelljs": "^0.8.5",
     "supertest": "^4.0.2",
     "ts-jest": "^29.2.5",
+    "tslib": "^2.7.0",
+    "tslog78": "file:D:/50.code/30.git78/30.git78/TsLog78",
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
     "koa78-upinfo": "^4.0.0",
     "md5": "^2.3.0",
     "mysql2": "^3.11.0",
-    "tslog78": "^1.1.1"
+    "tslog78": "^1"
   },
-  "bundleDependencies": [],
-  "jest": {
-    "config": "./jest.config.js"
-  }
+  "bundleDependencies": []
 }
