@@ -3,7 +3,7 @@
     "target": "es6",
     "lib": [ "ES2015", "DOM" ],
     "module": "commonjs",
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "strictNullChecks": true,
     "strictFunctionTypes": true,
