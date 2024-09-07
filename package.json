@@ -43,8 +43,10 @@
   "scripts": {
     "dev": "git checkout develop && git merge main && git push origin develop",
     "main": "git checkout main && git pull origin main && git merge develop --strategy-option theirs --no-edit",
-    "build": "npx tsc",
-    "test": "npm run build && jest --config jest.config.js",
+    "build": "tsc",
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
+    "prebuild": "rimraf dist",
+    "pretest": "npm run build",
     "prepublishOnly": "npm run build",
     "preversion": "npm test",
     "version": "git add -A",
@@ -61,6 +63,7 @@
     "@types/jest": "^29.5.12",
     "@types/md5": "^2.3.5",
     "@types/node": "^18.19.46",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "cross-env": "^7.0.3",
@@ -75,19 +78,20 @@
     "mochawesome": "^4.1.0",
     "nodemon": "^3.1.4",
     "phantom": "^6.3.0",
+    "reflect-metadata": "^0.2.2",
     "supertest": "^4.0.2",
     "ts-jest": "^29.2.5",
+    "tslib": "^2.7.0",
+    "tslog78": "file:D:/50.code/30.git78/30.git78/TsLog78",
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
     "koa78-upinfo": "^4.0.0",
     "md5": "^2.3.0",
-    "mysql2": "^3.11.0",
-    "tslog78": "^1.1.1"
+     "tslog78":"^1",
+    "mysql2": "^3.11.0"
   },
-  "bundleDependencies": [],
-  "jest": {
-    "config": "./jest.config.js"
-  }
+  "bundleDependencies": []
 }

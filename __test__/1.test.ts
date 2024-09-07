@@ -4,9 +4,12 @@ import UpInfo from 'koa78-upinfo';
 declare global {
   var __TEST_CONFIG__: any;
 }
+import { Config } from '../config/Config';
+const config = Config.getInstance();
 
-const config = global.__TEST_CONFIG__ as { mysql: any };
-const mysql78 = new Mysql78(config.mysql);
+
+
+const mysql78 = new Mysql78(config.get("mysql") );
 
 describe('Mysql78', () => {
   let upInfo: UpInfo;

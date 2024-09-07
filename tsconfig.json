@@ -1,15 +1,40 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "lib": [ "ES2015", "DOM" ],
     "module": "commonjs",
-    "lib": ["es6", "dom"],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
+    "rootDir": ".",
+    "outDir": "dist",
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
     "declaration": true,
-    "sourceMap": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["node", "jest", "supertest"],
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "useDefineForClassFields": false,
+    "paths": {
+      "tslog78": ["D:/50.code/30.git78/TsLog78/dist"]
+    } 
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "src/**/*"
+   ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
