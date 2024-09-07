@@ -94,7 +94,7 @@
     "koa78-upinfo": "^4.0.0",
     "md5": "^2.3.0",
     "mysql2": "^3.11.0",
-    "tslog78": "^1"
+    "tslog78": "^1.4"
   },
   "bundleDependencies": []
 }
