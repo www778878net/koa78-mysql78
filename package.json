@@ -85,7 +85,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^29.2.5",
     "tslib": "^2.7.0",
-    "tslog78": "file:D:/50.code/30.git78/30.git78/TsLog78",
+    "tslog78": "file:D:/50.code/30.git78/TsLog78",
     "typescript": "^5.5.4"
   },
   "dependencies": {
