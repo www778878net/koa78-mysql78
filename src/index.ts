@@ -6,7 +6,11 @@ import UpInfo from 'koa78-upinfo';
 import TsLog78 from 'tslog78';
 import md5 from 'md5';
 
+/**
+ * 如果不行就回退到2.4.0
+ */
 export default class Mysql78 {
+    private _statementCache: Map<string, mysql.PreparedStatementInfo> = new Map();
     private _pool: mysql.Pool | null = null;
     private _host: string = '';
     public isLog: boolean = false;
@@ -68,6 +72,19 @@ export default class Mysql78 {
         }
     }
 
+
+    async getStatement(connection: mysql.PoolConnection, cmdtext: string): Promise<mysql.PreparedStatementInfo> {
+        const cacheKey = `${connection.threadId}:${cmdtext}`;
+        if (this._statementCache.has(cacheKey)) {
+            return this._statementCache.get(cacheKey)!;
+        }
+
+        const statement = await connection.prepare(cmdtext);
+        this._statementCache.set(cacheKey, statement);
+        return statement;
+    }
+
+
     /**
      * sql get 
      * @param cmdtext sql  
@@ -87,7 +104,7 @@ export default class Mysql78 {
 
 
             connection = await this._pool.getConnection();
-            statement = await connection.prepare(cmdtext);
+            statement = await this.getStatement(connection, cmdtext);
             const [rows] = await statement.execute(values);
             const back = rows as any[];
 
@@ -104,9 +121,9 @@ export default class Mysql78 {
             this.log.error(err as Error, 'mysql_doGet');
             throw err;
         } finally {
-            if (statement) {
-                await statement.close(); // 确保预处理语句被关闭
-            }
+            // if (statement) {
+            //     await statement.close(); // 确保预处理语句被关闭
+            // }
             if (connection) {
                 connection.release(); // 确保连接被释放
             }
@@ -176,7 +193,7 @@ export default class Mysql78 {
 
         try {
             connection = await this._pool.getConnection();
-            statement = await connection.prepare(cmdtext);
+            statement = await this.getStatement(connection, cmdtext);
             const [result] = await statement.execute(values);
             const affectedRows = (result as mysql.ResultSetHeader).affectedRows;
 
@@ -193,9 +210,9 @@ export default class Mysql78 {
             this.log.error(err as Error, 'mysql_doM');
             return -1;
         } finally {
-            if (statement) {
-                await statement.close(); // 确保预处理语句被关闭
-            }
+            // if (statement) {
+            //     await statement.close(); // 确保预处理语句被关闭
+            // }
             if (connection) {
                 connection.release(); // 确保连接被释放
             }
