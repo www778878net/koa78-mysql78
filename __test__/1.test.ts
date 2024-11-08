@@ -42,6 +42,7 @@ describe('Mysql78', () => {
         const values = ['test_cid', 'test_kind', 'test_item', 'test_data', upInfo.uname, new Date(), UpInfo.getNewid()];
         const result = await mysql78.doMAdd(cmdtext, values, upInfo);
         expect(typeof result).toBe('number');
+        console.log(result);
         expect(result).toBeGreaterThan(0);
     });
 
