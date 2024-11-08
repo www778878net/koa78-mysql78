@@ -113,50 +113,50 @@ export default class Mysql78 {
         }
     }
 
-    /**
-     * The transaction returns information about the success or failure of the operation
-     * @param cmds more sql
-     * @param values more value
-     * @param errtexts more err
-     * @param logtext log
-     * @param logvalue log
-     * @param up user upload
-     */
-    async doT(cmds: string[], values: any[][], errtexts: string[], logtext: string, logvalue: any[], up: UpInfo): Promise<string> {
-        if (!this._pool) {
-            return 'pool null';
-        }
+    // /**
+    //  * The transaction returns information about the success or failure of the operation
+    //  * @param cmds more sql
+    //  * @param values more value
+    //  * @param errtexts more err
+    //  * @param logtext log
+    //  * @param logvalue log
+    //  * @param up user upload
+    //  */
+    // async doT(cmds: string[], values: any[][], errtexts: string[], logtext: string, logvalue: any[], up: UpInfo): Promise<string> {
+    //     if (!this._pool) {
+    //         return 'pool null';
+    //     }
 
-        const debug = up.debug ?? false;
-        const dstart = new Date();
+    //     const debug = up.debug ?? false;
+    //     const dstart = new Date();
 
-        try {
-            const connection = await this._pool.getConnection();
-            await connection.beginTransaction();
+    //     try {
+    //         const connection = await this._pool.getConnection();
+    //         await connection.beginTransaction();
 
-            try {
-                for (let i = 0; i < cmds.length; i++) {
-                    await connection.execute(cmds[i], values[i]);
-                }
+    //         try {
+    //             for (let i = 0; i < cmds.length; i++) {
+    //                 await connection.execute(cmds[i], values[i]);
+    //             }
 
-                await connection.commit();
-                connection.release();
+    //             await connection.commit();
+    //             connection.release();
 
-                this._saveLog(logtext, logvalue, new Date().getTime() - dstart.getTime(), 1, up);
-                return 'ok';
-            } catch (err) {
-                await connection.rollback();
-                connection.release();
+    //             this._saveLog(logtext, logvalue, new Date().getTime() - dstart.getTime(), 1, up);
+    //             return 'ok';
+    //         } catch (err) {
+    //             await connection.rollback();
+    //             connection.release();
 
-                const errmsg = errtexts.reduce((msg, text, i) => cmds[i] ? msg + text : msg, 'err!');
-                this.log.error(err as Error, 'mysql_doT');
-                return errmsg;
-            }
-        } catch (err) {
-            this.log.error(err as Error, 'mysql_doT_connection');
-            return 'error';
-        }
-    }
+    //             const errmsg = errtexts.reduce((msg, text, i) => cmds[i] ? msg + text : msg, 'err!');
+    //             this.log.error(err as Error, 'mysql_doT');
+    //             return errmsg;
+    //         }
+    //     } catch (err) {
+    //         this.log.error(err as Error, 'mysql_doT_connection');
+    //         return 'error';
+    //     }
+    // }
 
     /**
      * sql update Method returns the number of affected rows

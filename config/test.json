@@ -1,9 +1,9 @@
 {
-  "mysql": {
-    "host": "192.168.31.101",
-    "port": "3306",
-    "password": "www778878net",
-    "database": "saas",
-    "user": "root"
-  }
+    "mysql": {
+        "host": "192.168.31.181",
+        "port": "30006",
+        "password": "Www778878net*",
+        "database": "saas",
+        "user": "root"
+    }
 }
