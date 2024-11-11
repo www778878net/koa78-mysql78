@@ -46,22 +46,22 @@ describe('Mysql78', () => {
         expect(result).toBeGreaterThan(0);
     });
 
-    //   test('doT should perform transaction', async () => {
-    //     const cmds = [
-    //       'UPDATE testtb SET data = ? WHERE idpk = ?',
-    //       'INSERT INTO testtb (cid, kind, item, data, upby, uptime, id) VALUES (?, ?, ?, ?, ?, ?, ?)'
-    //     ];
-    //     const values = [
-    //       ['updated_data_1', 1],
-    //       ['test_cid_2', 'test_kind_2', 'test_item_2', 'test_data_2', upInfo.uname, new Date(), UpInfo.getNewid()]
-    //     ];
-    //     const errtexts = ['Error updating', 'Error inserting'];
-    //     const logtext = 'Transaction test';
-    //     const logvalue = ['test1', 'test2'];
+    test('doT should perform transaction', async () => {
+        const cmds = [
+            'UPDATE testtb SET data = ? WHERE idpk = ?',
+            'INSERT INTO testtb (cid, kind, item, data, upby, uptime, id) VALUES (?, ?, ?, ?, ?, ?, ?)'
+        ];
+        const values: string[][] = [
+            ['updated_data_1', "1"],
+            ['test_cid_2', 'test_kind_2', 'test_item_2', 'test_data_2', "guest", "1900-01-01", UpInfo.getNewid()]
+        ];
+        const errtexts = ['Error updating', 'Error inserting'];
+        const logtext = 'Transaction test';
+        const logvalue = ['test1', 'test2'];
 
-    //     const result = await mysql78.doT(cmds, values, errtexts, logtext, logvalue, upInfo);
-    //     expect(result).toBe('ok');
-    //   });
+        const result = await mysql78.doT(cmds, values, errtexts, logtext, logvalue, upInfo);
+        expect(result).toBe('ok');
+    });
 
     test('getConnection should return a connection', async () => {
         const connection = await mysql78.getConnection();
