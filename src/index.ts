@@ -17,6 +17,11 @@ export default class Mysql78 {
     public isCount: boolean = false;
     private log: TsLog78 = TsLog78.Instance;
     private warnHandler: ((info: string, kind: string, up: UpInfo) => Promise<any>) | null = null;
+
+    // 设置重试次数和重试延迟
+    private readonly maxRetryAttempts: number = 3;
+    private readonly retryDelayMs: number = 1000; // 1秒延迟
+
     constructor(config: {
         host?: string;
         port?: number;
@@ -45,8 +50,55 @@ export default class Mysql78 {
             password: config.password,
             database: config.database,
             dateStrings: true,
-            connectTimeout: 30 * 1000
+            connectTimeout: 30 * 1000,
+            waitForConnections: true,  // 等待连接池中的连接可用
         });
+    }
+
+
+    // 延迟函数
+    private async delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // 获取连接，并在发生错误时重试
+    private async getConnectionWithRetry(): Promise<mysql.PoolConnection | null> {
+        let attempts = 0;
+        while (attempts < this.maxRetryAttempts) {
+            try {
+                const connection = await this._pool?.getConnection();
+                if (connection === undefined) {
+                    return null;  // Explicitly return null if connection is undefined
+                }
+                return connection;
+            } catch (err) {
+                attempts++;
+                this.log.error(`Connection attempt ${attempts} failed:`, err);
+                if (attempts >= this.maxRetryAttempts) {
+                    throw err;
+                }
+                await this.delay(this.retryDelayMs);
+            }
+        }
+        return null;
+    }
+
+    // 重试函数的包装：用于 `doGet`、`doM`、`doT` 等方法
+    private async retryOperation<T>(operation: () => Promise<T>): Promise<T> {
+        let attempts = 0;
+        while (attempts < this.maxRetryAttempts) {
+            try {
+                return await operation();
+            } catch (err) {
+                attempts++;
+                this.log.error(`Operation attempt ${attempts} failed:`, err);
+                if (attempts >= this.maxRetryAttempts) {
+                    throw err;
+                }
+                await this.delay(this.retryDelayMs);
+            }
+        }
+        throw new Error("Max retry attempts reached.");
     }
 
     /**
@@ -102,8 +154,10 @@ export default class Mysql78 {
         let statement: mysql.PreparedStatementInfo | null = null;
         try {
 
-
-            connection = await this._pool.getConnection();
+            connection = await this.retryOperation(() => this.getConnectionWithRetry());
+            if (!connection) {
+                throw new Error("Failed to get a valid connection.");
+            }
             statement = await this.getStatement(connection, cmdtext);
             const [rows] = await statement.execute(values);
             const back = rows as any[];
@@ -140,7 +194,10 @@ export default class Mysql78 {
         let connection: mysql.PoolConnection | null = null;
 
         try {
-            connection = await this._pool.getConnection();
+            connection = await this.retryOperation(() => this.getConnectionWithRetry());
+            if (!connection) {
+                throw new Error("Failed to get a valid connection.");
+            }
             await connection.beginTransaction();
 
             const promises: Promise<any>[] = [];
@@ -198,7 +255,10 @@ export default class Mysql78 {
         let statement: mysql.PreparedStatementInfo | null = null;
 
         try {
-            connection = await this._pool.getConnection();
+            connection = await this.retryOperation(() => this.getConnectionWithRetry());
+            if (!connection) {
+                throw new Error("Failed to get a valid connection.");
+            }
             statement = await this.getStatement(connection, cmdtext);
             const [result] = await statement.execute(values);
             const affectedRows = (result as mysql.ResultSetHeader).affectedRows;
