@@ -37,7 +37,7 @@ export default class Mysql78 {
 
         this._host = config.host ?? '127.0.0.1';
         const port = config.port ?? 3306; // 端口
-        const max = config.max ?? 200; // 最大线程数
+        const max = config.max ?? 10; // 最大线程数
         const user = config.user ?? 'root'; // mysql用户名
         this.isLog = config.isLog ?? false; // 是否打印日志（影响性能）
         this.isCount = config.isCount ?? false; // 是否统计效率（影响性能）
